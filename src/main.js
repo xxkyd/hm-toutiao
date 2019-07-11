@@ -7,6 +7,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import router from './router'
+// 引入axios
+import axios from 'axios'
+Vue.prototype.$http = axios
 // 注册到Vue实例
 Vue.use(ElementUI)
 Vue.config.productionTip = false
