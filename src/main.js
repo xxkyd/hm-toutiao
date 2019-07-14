@@ -8,7 +8,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import router from './router'
 // 引入axios
-import axios from 'axios'
+import axios from './api/axios'
+// 基准路径
+/* axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
+// token认证
+axios.defaults.headers = {
+  Authorization: 'Bearer' + JSON.parse(window.sessionStorage.getItem('hm-toutiao')).token
+} */
 Vue.prototype.$http = axios
 // 注册到Vue实例
 Vue.use(ElementUI)
