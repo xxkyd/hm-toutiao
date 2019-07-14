@@ -117,6 +117,7 @@ export default {
         }
       })
     },
+
     fn () {
       // console.log(this.loginForm.checkboxs)
       /* if (this.loginForm.checkboxs = !this.loginForm.checkboxs) {
