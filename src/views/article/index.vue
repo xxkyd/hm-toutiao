@@ -2,10 +2,7 @@
   <div class="article-container">
     <el-card>
       <div slot="header">
-        <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>内容管理</el-breadcrumb-item>
-        </el-breadcrumb>
+        <my-bread>粉丝管理</my-bread>
       </div>
       <el-form :model="reqParams" size="small" label-width="80px">
         <el-form-item label="状态：">
@@ -42,18 +39,14 @@
       </el-form>
     </el-card>
     <el-card>
-      <my-test>
-          <template slot="content" slot-scope="scope">内容1 {{ scope.test }}</template>
-          <template v-slot:footer="scope">底部1 {{ scope.test }}</template>
-      </my-test>
     </el-card>
   </div>
 </template>
 
 <script>
-import MyTest from '@/components/my-test.vue'
+import MyBread from '@/components/my-bread.vue'
 export default {
-  components: { MyTest },
+  components: { MyBread },
   data () {
     return {
       reqParams: {
