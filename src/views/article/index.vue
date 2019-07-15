@@ -41,12 +41,19 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <el-card></el-card>
+    <el-card>
+      <my-test>
+          <template slot="content" slot-scope="scope">内容1 {{ scope.test }}</template>
+          <template v-slot:footer="scope">底部1 {{ scope.test }}</template>
+      </my-test>
+    </el-card>
   </div>
 </template>
 
 <script>
+import MyTest from '@/components/my-test.vue'
 export default {
+  components: { MyTest },
   data () {
     return {
       reqParams: {
