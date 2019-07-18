@@ -10,8 +10,6 @@ import router from './router'
 // 引入axios
 import axios from './api/axios'
 import componnets from '@/components'
-// 导入全局样式
-import '@/styles/index.less'
 Vue.use(componnets)
 // 基准路径
 /* axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
