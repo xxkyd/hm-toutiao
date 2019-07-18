@@ -9,6 +9,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 // 引入axios
 import axios from './api/axios'
+import componnets from '@/components'
+Vue.use(componnets)
 // 基准路径
 /* axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
 // token认证
