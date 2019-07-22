@@ -19,7 +19,7 @@
               <el-input v-model="userForm.email"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary">保存设置</el-button>
+              <el-button type="primary" @click="updateUserInfo">保存设置</el-button>
             </el-form-item>
           </el-form>
         </el-col>
@@ -27,8 +27,9 @@
           <!-- 上传头像 -->
           <el-upload
             class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action=""
             :show-file-list="false"
+            :http-request="myUpload"
           >
             <img v-if="userForm.photo" :src="userForm.photo" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -41,6 +42,7 @@
 </template>
 
 <script>
+import eventBus from '@/eventBus'
 export default {
   data () {
     return {
@@ -62,6 +64,34 @@ export default {
     async getUserInfo () {
       const { data: { data } } = await this.$http.get('user/profile')
       this.userForm = data
+    },
+    // 修改用户信息
+    async updateUserInfo () {
+      const { data: { data } } = await this.$http.patch('user/profile', {
+        name: this.userForm.name,
+        intro: this.userForm.intro,
+        email: this.userForm.email
+      })
+      this.$message.success('修改用户信息成功')
+      eventBus.$emit('updateHeaderName', data.name)
+      const userInfo = JSON.parse(window.sessionStorage.getItem('hm-toutiao'))
+      userInfo.name = data.name
+      window.sessionStorage.setItem('hm-toutiao', JSON.stringify(userInfo))
+    },
+    myUpload (data) {
+      const formData = new FormData()
+      formData.append('photo', data.file)
+      this.$http.patch('user/photo', formData).then(res => {
+        const url = res.data.data.photo
+        this.$message.success('修改头像成功')
+        this.userForm.photo = url
+        // 更新home组件的头像
+        eventBus.$emit('updateHeaderPhoto', url)
+        // 更新本地存储的头像
+        const userInfo = JSON.parse(window.sessionStorage.getItem('hm-toutiao'))
+        userInfo.photo = url
+        window.sessionStorage.setItem('hm-toutiao', JSON.stringify(userInfo))
+      })
     }
   }
 }
